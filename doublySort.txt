@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node*prev;
+    struct node *next;
+};
+int temp;
+ void print(struct node*first){
+     struct node *temp = first;
+     while(temp!=NULL){
+        printf("ELEMENTS ARE: %d\n" ,temp->data);
+         temp= temp->next;
+     }
+ }
+ struct node*InsertAtHead(struct node*first,int data){
+     struct node*ptr = (struct node*)malloc(sizeof(struct node));
+     ptr->next= first;
+     ptr->data= data;
+     first->prev =ptr;
+     ptr->prev =NULL;
+     first = ptr;
+     return first;
+ }
+ void Sort(struct node*first){
+    struct node* curr=NULL;
+    struct node* index=NULL;
+    int temp;
+    for(curr=first; curr->next!=NULL;curr= curr->next){
+        for(index = curr->next;index!=NULL; index = index->next){
+            if(curr->data > index->data){
+                temp = curr->data;
+                curr->data = index->data;
+                index->data= temp;
+            }
+        }
+    }
+    
+ }
+int main() {
+   struct node* first;
+   struct node* second;
+   struct node* third;
+   struct node* fourth;
+   first = (struct node*)malloc(sizeof(struct node));
+   second = (struct node*)malloc(sizeof(struct node));
+   third = (struct node*)malloc(sizeof(struct node));
+  fourth = (struct node*)malloc(sizeof(struct node));
+   first->prev = NULL;
+   first->data = 12;
+   first->next=second;
+   
+   
+   second->prev = first;
+    second->data= 14;
+   second->next = third;
+   
+   
+   third->prev = second;
+   third->data= 13;
+   third->next = fourth;
+   
+   fourth->prev = third;
+   fourth->data= 11;
+   fourth->next = NULL;
+   
+   struct node*head= ( struct node*)malloc(sizeof(struct node));
+   
+   
+    Sort(first);
+    print(first);
+   
+  
+}
